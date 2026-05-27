@@ -10,9 +10,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body { font-family: 'Inter', system_ui, sans-serif; }
         
-        /* OFFICIAL NS FLAG + GOVERNMENT INSPIRED COLORS */
+        /* SOLID NOVA SCOTIA FLAG BLUE - no gradient */
         .donair-bg {
-            background: linear-gradient(135deg, #003262 0%, #C8102E 100%);
+            background-color: #003DA5;
         }
         
         .result-card {
@@ -24,8 +24,8 @@
         }
     </style>
 </head>
-<body class="bg-white dark:bg-[#003262] text-gray-900 dark:text-white min-h-screen pb-12">
-    <!-- HEADER -->
+<body class="bg-white dark:bg-[#003DA5] text-gray-900 dark:text-white min-h-screen pb-12">
+    <!-- HEADER - Solid NS Flag Blue -->
     <div class="donair-bg py-6 px-6 border-b-4 border-[#C8102E]">
         <div class="max-w-2xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -85,7 +85,7 @@
         <div id="no-location" class="hidden bg-gray-100 dark:bg-white/10 rounded-3xl p-8 text-center">
             <p class="text-2xl mb-4">📍 Location needed</p>
             <p class="mb-6 text-gray-700 dark:text-gray-300">Enable location services for real-time distances.</p>
-            <button onclick="getLocation()" class="bg-[#003262] dark:bg-white text-white dark:text-[#003262] font-bold px-8 py-4 rounded-2xl text-lg hover:bg-[#C8102E] hover:text-white transition-all">
+            <button onclick="getLocation()" class="bg-[#003DA5] dark:bg-white text-white dark:text-[#003DA5] font-bold px-8 py-4 rounded-2xl text-lg hover:bg-[#C8102E] hover:text-white transition-all">
                 Share My Location
             </button>
             <p onclick="showAllSpots()" class="text-sm mt-6 text-[#48B8C7] cursor-pointer hover:underline">Or just show me everything</p>
@@ -97,7 +97,7 @@
         <p class="mt-6 text-[10px]">Made with donair sauce in Halifax, NS • 2026</p>
     </div>
 
-      <script>
+    <script>
         // ====================== DATA ======================
         const donairs = [
             { name: "King of Donair", address: "6422 Quinpool Road, Halifax, NS", lat: 44.6442162, lng: -63.6008357, note: "The original since 1973. Iconic Halifax spot, open late" },
@@ -178,11 +178,11 @@
                                 <h4 class="font-semibold text-xl">${spot.name}</h4>
                                 <p class="text-white/80 text-sm">${spot.address}</p>
                             </div>
-                            ${spot.distance ? `<div class="text-right"><div class="text-[#e05d3b] font-mono font-bold text-2xl">${spot.distance}</div><div class="text-xs text-[#00b8a9]">away</div></div>` : ''}
+                            ${spot.distance ? `<div class="text-right"><div class="text-[#C8102E] font-mono font-bold text-2xl">${spot.distance}</div><div class="text-xs text-[#48B8C7]">away</div></div>` : ''}
                         </div>
-                        ${spot.note ? `<p class="text-[#00b8a9] text-xs mt-3 inline-block bg-white/10 px-3 py-1 rounded-2xl">${spot.note}</p>` : ''}
+                        ${spot.note ? `<p class="text-[#48B8C7] text-xs mt-3 inline-block bg-white/10 px-3 py-1 rounded-2xl">${spot.note}</p>` : ''}
                     </div>
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}" target="_blank" class="flex-shrink-0 self-center bg-white text-[#0a2540] w-10 h-10 rounded-2xl flex items-center justify-center text-xl hover:bg-[#e05d3b] hover:text-white">
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}" target="_blank" class="flex-shrink-0 self-center bg-white text-[#003DA5] w-10 h-10 rounded-2xl flex items-center justify-center text-xl hover:bg-[#C8102E] hover:text-white">
                         <i class="fas fa-directions"></i>
                     </a>
                 `;
@@ -196,10 +196,10 @@
             document.getElementById("results-panel").classList.remove("hidden");
             const titleEl = document.getElementById("results-title");
             if (category === "donair") {
-                titleEl.innerHTML = `🍖 <span class="text-[#e05d3b]">NEAREST DONAIR</span>`;
+                titleEl.innerHTML = `🍖 <span class="text-[#C8102E]">NEAREST DONAIR</span>`;
                 renderResults(calculateDistances(donairs), category);
             } else {
-                titleEl.innerHTML = `🚽 <span class="text-[#00b8a9]">NEAREST WASHROOM</span>`;
+                titleEl.innerHTML = `🚽 <span class="text-[#48B8C7]">NEAREST WASHROOM</span>`;
                 renderResults(calculateDistances(washrooms), category);
             }
         }
@@ -219,12 +219,12 @@
             const container = document.getElementById("results-list");
             container.innerHTML = `
                 <div class="mb-8">
-                    <h4 class="text-[#e05d3b] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🍖</span> DONAIRS</h4>
-                    ${donairs.map(d => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${d.name}</div><div class="text-sm text-white/70">${d.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${d.lat},${d.lng}" target="_blank" class="text-[#e05d3b] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
+                    <h4 class="text-[#C8102E] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🍖</span> DONAIRS</h4>
+                    ${donairs.map(d => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${d.name}</div><div class="text-sm text-white/70">${d.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${d.lat},${d.lng}" target="_blank" class="text-[#C8102E] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
                 </div>
                 <div>
-                    <h4 class="text-[#00b8a9] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🚽</span> WASHROOMS</h4>
-                    ${washrooms.map(w => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${w.name}</div><div class="text-sm text-white/70">${w.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${w.lat},${w.lng}" target="_blank" class="text-[#00b8a9] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
+                    <h4 class="text-[#48B8C7] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🚽</span> WASHROOMS</h4>
+                    ${washrooms.map(w => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${w.name}</div><div class="text-sm text-white/70">${w.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${w.lat},${w.lng}" target="_blank" class="text-[#48B8C7] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
                 </div>
             `;
         }
@@ -253,7 +253,7 @@
         // Init
         window.onload = () => {
             initTheme();
-            console.log('%c✅ HFXGo Finder — East Coast NS color scheme loaded!', 'color:#e05d3b; font-weight:bold');
+            console.log('%c✅ HFXGo Finder — Solid NS flag blue header loaded!', 'color:#C8102E; font-weight:bold');
             setTimeout(() => { if (!userLat) getLocation(); }, 800);
         };
     </script>
