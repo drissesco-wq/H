@@ -49,8 +49,8 @@
             <p class="text-[#48B8C7] text-sm font-medium">East Coast priorities since 2026</p>
         </div>
 
-        <!-- FOUR BUTTONS -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10" id="main-buttons">
+        <!-- 2 BUTTONS PER LINE (2-column grid) -->
+        <div class="grid grid-cols-2 gap-4 mb-10" id="main-buttons">
             <button onclick="findCategory('donair')" class="bg-[#C8102E] hover:bg-[#a80f24] text-white font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
                 <img src="donair-icon.png" alt="Donair" class="w-14 h-14 mb-2">
                 NEAREST<br>DONAIR
@@ -162,15 +162,12 @@
             { name: "Davis Wharf Coffee", address: "1649 Lower Water St, Halifax, NS", lat: 44.6490, lng: -63.5725, note: "Waterfront pour-over spot" },
             { name: "Field Guide Coffee", address: "1652 Granville St, Halifax, NS", lat: 44.6458, lng: -63.5745, note: "Craft coffee & light bites" },
             { name: "The Coffee Factory", address: "2015 Gottingen St, Halifax, NS", lat: 44.6675, lng: -63.5905, note: "North End favorite" },
-            // Tim Hortons
             { name: "Tim Hortons Spring Garden", address: "5680 Spring Garden Rd, Halifax, NS", lat: 44.6445, lng: -63.5755, note: "24/7 drive-thru" },
             { name: "Tim Hortons Quinpool", address: "6455 Quinpool Rd, Halifax, NS", lat: 44.6435, lng: -63.5900, note: "West End classic" },
             { name: "Tim Hortons Upper Water", address: "1781 Upper Water St, Halifax, NS", lat: 44.6495, lng: -63.5730, note: "Waterfront location" },
-            // Starbucks
             { name: "Starbucks Spring Garden", address: "5640 Spring Garden Rd, Halifax, NS", lat: 44.6448, lng: -63.5758, note: "Downtown flagship" },
             { name: "Starbucks Parkland", address: "20 Parkland Dr, Halifax, NS", lat: 44.6525, lng: -63.6550, note: "Clayton Park" },
             { name: "Starbucks Kaye St", address: "5554 Kaye St, Halifax, NS", lat: 44.6415, lng: -63.5720, note: "North End" },
-            // Second Cup
             { name: "Second Cup Bayers Lake", address: "185 Chain Lake Drive, Halifax, NS", lat: 44.6515, lng: -63.6180, note: "Bayers Lake" },
             { name: "Second Cup Dartmouth Crossing", address: "49 Gale Terrace, Dartmouth, NS", lat: 44.7000, lng: -63.5500, note: "Dartmouth Crossing" }
         ];
@@ -317,7 +314,7 @@
 
         window.onload = () => {
             initTheme();
-            console.log('%c✅ HFXGo Finder 100% complete with Tim Hortons, Starbucks & Second Cup added!', 'color:#B45309; font-weight:bold');
+            console.log('%c✅ HFXGo Finder — 2 buttons per line layout loaded!', 'color:#C8102E; font-weight:bold');
             setTimeout(() => { if (!userLat) getLocation(); }, 800);
         };
     </script>
