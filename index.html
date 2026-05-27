@@ -20,11 +20,12 @@
     </style>
 </head>
 <body class="bg-white dark:bg-[#003DA5] text-gray-900 dark:text-white min-h-screen pb-12">
+
     <!-- HEADER -->
     <div class="donair-bg py-6 px-6 border-b-4 border-[#C8102E]">
         <div class="max-w-2xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="./donair-icon.png" alt="HFX Donair" class="w-12 h-12 flex-shrink-0">
+                <img src="donair-icon.png" alt="HFX Donair" class="w-12 h-12 flex-shrink-0">
                 <div>
                     <h1 class="text-4xl font-bold tracking-tighter">HFX<span class="text-[#C8102E]">Go</span></h1>
                     <p class="text-sm font-medium text-[#48B8C7] -mt-1">Donair &amp; Public Washroom Finder™</p>
@@ -50,7 +51,7 @@
 
         <div class="grid grid-cols-2 gap-4 mb-10" id="main-buttons">
             <button onclick="findCategory('donair')" class="bg-[#C8102E] hover:bg-[#a80f24] text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
-                <img src="./donair-icon.png" alt="Donair" class="w-16 h-16 mb-3">
+                <img src="donair-icon.png" alt="Donair" class="w-16 h-16 mb-3">
                 NEAREST<br>DONAIR
             </button>
             <button onclick="findCategory('washroom')" class="bg-[#48B8C7] hover:bg-[#3a9fa8] text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
@@ -59,7 +60,7 @@
             </button>
         </div>
 
-        <!-- RESULTS, STATUS, ETC. (unchanged) -->
+        <!-- RESULTS SECTION -->
         <div id="results-panel" class="hidden">
             <div class="flex items-center justify-between mb-6">
                 <h3 id="results-title" class="text-2xl font-bold flex items-center gap-3"></h3>
@@ -71,6 +72,7 @@
             <div id="results-list" class="space-y-3"></div>
         </div>
 
+        <!-- STATUS -->
         <div id="status" class="hidden text-center py-8">
             <div class="inline-flex items-center gap-3 text-[#48B8C7]">
                 <i class="fas fa-spinner fa-spin text-2xl"></i>
@@ -78,6 +80,7 @@
             </div>
         </div>
 
+        <!-- NO LOCATION -->
         <div id="no-location" class="hidden bg-gray-100 dark:bg-white/10 rounded-3xl p-8 text-center">
             <p class="text-2xl mb-4">📍 Location needed</p>
             <p class="mb-6 text-gray-700 dark:text-gray-300">Enable location services for real-time distances.</p>
@@ -88,6 +91,7 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
     <div class="max-w-2xl mx-auto px-4 mt-12 text-center text-xs text-gray-500 dark:text-white/60">
         <p class="mb-3">🔥 This is the real QR code page on your HFXGo shirt</p>
         <p class="mt-6 text-[10px]">Made with donair sauce in Halifax, NS • 2026</p>
@@ -246,10 +250,9 @@
             }
         }
 
-        // ====================== INIT ======================
         window.onload = () => {
             initTheme();
-            console.log('%c✅ HFXGo Finder ready with custom donair icon + NS flag colors!', 'color:#C8102E; font-weight:bold');
+            console.log('%c✅ HFXGo Finder ready with custom donair icon!', 'color:#C8102E; font-weight:bold');
             setTimeout(() => { if (!userLat) getLocation(); }, 800);
         };
     </script>
