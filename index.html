@@ -8,29 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        
-        :root {
-            --navy: #0a2540;
-            --orange: #ff6200;
-            --teal: #00b8a9;
-        }
-        
-        body {
-            font-family: 'Inter', system_ui, sans-serif;
-        }
-        
-        .donair-bg {
-            background: linear-gradient(135deg, #0a2540 0%, #ff6200 100%);
-        }
-        
-        .result-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .result-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgb(255 98 0);
-        }
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .donair-bg { background: linear-gradient(135deg, #0a2540 0%, #ff6200 100%); }
+        .result-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .result-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgb(255 98 0); }
     </style>
 </head>
 <body class="bg-white dark:bg-[#0a2540] text-gray-900 dark:text-white min-h-screen pb-12">
@@ -44,17 +25,12 @@
                     <p class="text-sm font-medium text-[#00b8a9] -mt-1">Donair &amp; Public Washroom Finder™</p>
                 </div>
             </div>
-            
             <div class="flex items-center gap-4">
-                <!-- Location status -->
-                <span class="px-3 py-1 bg-white/20 dark:bg-white/20 rounded-full flex items-center gap-1 text-sm">
+                <span class="px-3 py-1 bg-white/20 rounded-full flex items-center gap-1 text-sm">
                     <i class="fas fa-map-marker-alt"></i>
                     <span id="location-status" class="font-medium">Halifax, NS</span>
                 </span>
-                
-                <!-- Dark/Light Toggle -->
-                <button onclick="toggleDarkMode()" 
-                        class="w-10 h-10 flex items-center justify-center rounded-2xl bg-white/20 hover:bg-white/30 text-white transition-all text-2xl">
+                <button onclick="toggleDarkMode()" class="w-10 h-10 flex items-center justify-center rounded-2xl bg-white/20 hover:bg-white/30 text-white text-2xl">
                     <i id="theme-icon" class="fas fa-moon"></i>
                 </button>
             </div>
@@ -67,37 +43,28 @@
             <p class="text-[#00b8a9] text-sm font-medium">East Coast priorities since 2026</p>
         </div>
 
-        <!-- MAIN BUTTONS -->
         <div class="grid grid-cols-2 gap-4 mb-10" id="main-buttons">
-            <button onclick="findCategory('donair')"
-                    class="bg-[#ff6200] hover:bg-orange-600 text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+            <button onclick="findCategory('donair')" class="bg-[#ff6200] hover:bg-orange-600 text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
                 <span class="text-6xl mb-3">🍖</span>
                 NEAREST<br>DONAIR
             </button>
-            
-            <button onclick="findCategory('washroom')"
-                    class="bg-[#00b8a9] hover:bg-teal-600 text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+            <button onclick="findCategory('washroom')" class="bg-[#00b8a9] hover:bg-teal-600 text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
                 <span class="text-6xl mb-3">🚽</span>
                 NEAREST<br>WASHROOM
             </button>
         </div>
 
-        <!-- RESULTS SECTION -->
         <div id="results-panel" class="hidden">
             <div class="flex items-center justify-between mb-6">
                 <h3 id="results-title" class="text-2xl font-bold flex items-center gap-3"></h3>
-                <button onclick="resetUI()" 
-                        class="flex items-center gap-2 text-sm font-medium px-4 py-2 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 rounded-2xl">
+                <button onclick="resetUI()" class="flex items-center gap-2 text-sm font-medium px-4 py-2 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 rounded-2xl">
                     <i class="fas fa-arrow-left"></i> Back
                 </button>
             </div>
-            
             <div id="distance-note" class="text-xs text-[#00b8a9] mb-4 font-medium flex items-center gap-1"></div>
-            
             <div id="results-list" class="space-y-3"></div>
         </div>
 
-        <!-- STATUS / LOADING -->
         <div id="status" class="hidden text-center py-8">
             <div class="inline-flex items-center gap-3 text-[#00b8a9]">
                 <i class="fas fa-spinner fa-spin text-2xl"></i>
@@ -105,44 +72,146 @@
             </div>
         </div>
 
-        <!-- NO LOCATION FALLBACK -->
         <div id="no-location" class="hidden bg-gray-100 dark:bg-white/10 rounded-3xl p-8 text-center">
             <p class="text-2xl mb-4">📍 Location needed</p>
-            <p class="mb-6 text-gray-700 dark:text-gray-300">Enable location services for real-time distances and the closest spots in Halifax.</p>
-            <button onclick="getLocation()" 
-                    class="bg-[#0a2540] dark:bg-white text-white dark:text-[#0a2540] font-bold px-8 py-4 rounded-2xl text-lg hover:bg-[#ff6200] hover:text-white transition-all">
+            <p class="mb-6 text-gray-700 dark:text-gray-300">Enable location services for real-time distances.</p>
+            <button onclick="getLocation()" class="bg-[#0a2540] dark:bg-white text-white dark:text-[#0a2540] font-bold px-8 py-4 rounded-2xl text-lg hover:bg-[#ff6200] hover:text-white transition-all">
                 Share My Location
             </button>
             <p onclick="showAllSpots()" class="text-sm mt-6 text-[#00b8a9] cursor-pointer hover:underline">Or just show me everything</p>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <div class="max-w-2xl mx-auto px-4 mt-12 text-center text-xs text-gray-500 dark:text-white/60">
         <p class="mb-3">🔥 This is the real QR code page on your HFXGo shirt</p>
-        <div class="flex justify-center items-center gap-8 text-base">
-            <a href="https://hfxgo.ca" class="flex items-center gap-1 hover:text-[#ff6200]">
-                <i class="fas fa-tshirt"></i> Shop HFXGo Tees
-            </a>
-            <a href="#" onclick="window.location.reload()" class="flex items-center gap-1 hover:text-[#00b8a9]">
-                <i class="fas fa-redo"></i> Reset Finder
-            </a>
-        </div>
         <p class="mt-6 text-[10px]">Made with donair sauce in Halifax, NS • 2026</p>
     </div>
 
     <script>
-        // ====================== DATA (same as before) ======================
-        const donairs = [ /* ... same array as previous version ... */ ];
-        const washrooms = [ /* ... same array as previous version ... */ ];
+        // ====================== DATA ======================
+        const donairs = [
+            { name: "King of Donair", address: "3745 Kempt Rd, Halifax", lat: 44.6631, lng: -63.6048, note: "The original. Open till 3am" },
+            { name: "Randy's Donair", address: "2281 Gottingen St, Halifax", lat: 44.6685, lng: -63.5902, note: "North End legend" },
+            { name: "Tony's Donair & Pizza", address: "291 Windmill Rd, Dartmouth", lat: 44.6792, lng: -63.5654, note: "Dartmouth side" },
+            { name: "Istanbul Donair", address: "1502 Queen St, Halifax", lat: 44.6428, lng: -63.5759, note: "Downtown quick" },
+            { name: "King of Donair (Quinpool)", address: "6421 Quinpool Rd, Halifax", lat: 44.6433, lng: -63.5901, note: "Late night classic" }
+        ];
 
-        // (Full data arrays from the previous code are unchanged — just paste them here if you copy the whole thing)
+        const washrooms = [
+            { name: "Halifax Waterfront Boardwalk", address: "1751 Lower Water St", lat: 44.6480, lng: -63.5735, note: "Public, 24/7" },
+            { name: "Halifax Central Library", address: "5440 Spring Garden Rd", lat: 44.6445, lng: -63.5758, note: "Clean & free" },
+            { name: "Citadel Hill (Visitor Centre)", address: "901 Citadel Hill", lat: 44.6523, lng: -63.5821, note: "Tourist friendly" },
+            { name: "Scotia Square Food Court", address: "5201 Duke St", lat: 44.6498, lng: -63.5764, note: "Inside mall" },
+            { name: "Grand Parade (City Hall)", address: "1740 Granville St", lat: 44.6491, lng: -63.5748, note: "Downtown public" }
+        ];
 
-        // ====================== TOGGLE DARK MODE ======================
+        // ====================== HELPERS ======================
+        function haversine(lat1, lon1, lat2, lon2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const km = R * c;
+            return km < 1 ? (km * 1000).toFixed(0) + " m" : km.toFixed(1) + " km";
+        }
+
+        let userLat = null;
+        let userLng = null;
+
+        function getLocation() {
+            document.getElementById("status").classList.remove("hidden");
+            document.getElementById("status-text").textContent = "Finding you in the 902…";
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        userLat = position.coords.latitude;
+                        userLng = position.coords.longitude;
+                        document.getElementById("location-status").innerHTML = `📍 ${userLat.toFixed(3)}, ${userLng.toFixed(3)}`;
+                        document.getElementById("status").classList.add("hidden");
+                        window.lastCategory && findCategory(window.lastCategory, true);
+                    },
+                    () => { document.getElementById("status").classList.add("hidden"); document.getElementById("no-location").classList.remove("hidden"); }
+                );
+            }
+        }
+
+        function calculateDistances(spots) {
+            if (!userLat || !userLng) return spots;
+            return spots.map(spot => {
+                const distance = haversine(userLat, userLng, spot.lat, spot.lng);
+                return { ...spot, distance };
+            }).sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+        }
+
+        function renderResults(spots, category) {
+            const container = document.getElementById("results-list");
+            container.innerHTML = "";
+            spots.forEach(spot => {
+                const card = document.createElement("div");
+                card.className = "result-card bg-white/10 backdrop-blur-md rounded-3xl p-5 flex gap-4";
+                card.innerHTML = `
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-semibold text-xl">${spot.name}</h4>
+                                <p class="text-white/80 text-sm">${spot.address}</p>
+                            </div>
+                            ${spot.distance ? `<div class="text-right"><div class="text-[#ff6200] font-mono font-bold text-2xl">${spot.distance}</div><div class="text-xs text-[#00b8a9]">away</div></div>` : ''}
+                        </div>
+                        ${spot.note ? `<p class="text-[#00b8a9] text-xs mt-3 inline-block bg-white/10 px-3 py-1 rounded-2xl">${spot.note}</p>` : ''}
+                    </div>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}" target="_blank" class="flex-shrink-0 self-center bg-white text-[#0a2540] w-10 h-10 rounded-2xl flex items-center justify-center text-xl hover:bg-[#ff6200] hover:text-white">
+                        <i class="fas fa-directions"></i>
+                    </a>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function findCategory(category, silent = false) {
+            window.lastCategory = category;
+            document.getElementById("main-buttons").classList.add("hidden");
+            document.getElementById("results-panel").classList.remove("hidden");
+            const titleEl = document.getElementById("results-title");
+            if (category === "donair") {
+                titleEl.innerHTML = `🍖 <span class="text-[#ff6200]">NEAREST DONAIR</span>`;
+                renderResults(calculateDistances(donairs), category);
+            } else {
+                titleEl.innerHTML = `🚽 <span class="text-[#00b8a9]">NEAREST WASHROOM</span>`;
+                renderResults(calculateDistances(washrooms), category);
+            }
+        }
+
+        function resetUI() {
+            document.getElementById("results-panel").classList.add("hidden");
+            document.getElementById("main-buttons").classList.remove("hidden");
+            document.getElementById("no-location").classList.add("hidden");
+        }
+
+        function showAllSpots() {
+            document.getElementById("no-location").classList.add("hidden");
+            document.getElementById("results-panel").classList.remove("hidden");
+            document.getElementById("main-buttons").classList.add("hidden");
+            const titleEl = document.getElementById("results-title");
+            titleEl.innerHTML = `📍 ALL SPOTS`;
+            const container = document.getElementById("results-list");
+            container.innerHTML = `
+                <div class="mb-8">
+                    <h4 class="text-[#ff6200] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🍖</span> DONAIRS</h4>
+                    ${donairs.map(d => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${d.name}</div><div class="text-sm text-white/70">${d.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${d.lat},${d.lng}" target="_blank" class="text-[#ff6200] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
+                </div>
+                <div>
+                    <h4 class="text-[#00b8a9] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🚽</span> WASHROOMS</h4>
+                    ${washrooms.map(w => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${w.name}</div><div class="text-sm text-white/70">${w.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${w.lat},${w.lng}" target="_blank" class="text-[#00b8a9] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
+                </div>
+            `;
+        }
+
+        // Dark mode toggle
         function toggleDarkMode() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
-            
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
                 localStorage.theme = 'light';
@@ -154,7 +223,6 @@
             }
         }
 
-        // Load saved theme
         function initTheme() {
             if (localStorage.theme === 'light') {
                 document.documentElement.classList.remove('dark');
@@ -162,13 +230,10 @@
             }
         }
 
-        // Rest of your original JS (getLocation, haversine, renderResults, findCategory, etc.) stays 100% the same
-        // ... paste the entire <script> from the previous version here ...
-
-        // Just add this at the very bottom of the script:
+        // Init
         window.onload = () => {
             initTheme();
-            console.log('%c✅ HFXGo Finder ready with dark/light toggle', 'color:#ff6200; font-weight:bold');
+            console.log('%c✅ HFXGo Finder is now LIVE with donairs!', 'color:#ff6200; font-weight:bold');
             setTimeout(() => { if (!userLat) getLocation(); }, 800);
         };
     </script>
