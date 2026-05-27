@@ -9,12 +9,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body { font-family: 'Inter', system_ui, sans-serif; }
-        
-        /* SOLID NOVA SCOTIA FLAG BLUE */
-        .donair-bg {
-            background-color: #003DA5;
-        }
-        
+        .donair-bg { background-color: #003DA5; }
         .result-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -25,11 +20,11 @@
     </style>
 </head>
 <body class="bg-white dark:bg-[#003DA5] text-gray-900 dark:text-white min-h-screen pb-12">
-    <!-- HEADER - Solid NS Flag Blue + Custom Donair Icon -->
+    <!-- HEADER -->
     <div class="donair-bg py-6 px-6 border-b-4 border-[#C8102E]">
         <div class="max-w-2xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="donair-icon.png" alt="HFX Donair" class="w-12 h-12 flex-shrink-0">
+                <img src="./donair-icon.png" alt="HFX Donair" class="w-12 h-12 flex-shrink-0">
                 <div>
                     <h1 class="text-4xl font-bold tracking-tighter">HFX<span class="text-[#C8102E]">Go</span></h1>
                     <p class="text-sm font-medium text-[#48B8C7] -mt-1">Donair &amp; Public Washroom Finder™</p>
@@ -53,26 +48,22 @@
             <p class="text-[#48B8C7] text-sm font-medium">East Coast priorities since 2026</p>
         </div>
 
-        <!-- MAIN BUTTONS -->
         <div class="grid grid-cols-2 gap-4 mb-10" id="main-buttons">
-            <button onclick="findCategory('donair')" 
-                    class="bg-[#C8102E] hover:bg-[#a80f24] text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
-                <img src="donair-icon.png" alt="Donair" class="w-16 h-16 mb-3">
+            <button onclick="findCategory('donair')" class="bg-[#C8102E] hover:bg-[#a80f24] text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+                <img src="./donair-icon.png" alt="Donair" class="w-16 h-16 mb-3">
                 NEAREST<br>DONAIR
             </button>
-            <button onclick="findCategory('washroom')" 
-                    class="bg-[#48B8C7] hover:bg-[#3a9fa8] text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+            <button onclick="findCategory('washroom')" class="bg-[#48B8C7] hover:bg-[#3a9fa8] text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
                 <span class="text-6xl mb-3">🚽</span>
                 NEAREST<br>WASHROOM
             </button>
         </div>
 
-        <!-- RESULTS SECTION -->
+        <!-- RESULTS, STATUS, ETC. (unchanged) -->
         <div id="results-panel" class="hidden">
             <div class="flex items-center justify-between mb-6">
                 <h3 id="results-title" class="text-2xl font-bold flex items-center gap-3"></h3>
-                <button onclick="resetUI()" 
-                        class="flex items-center gap-2 text-sm font-medium px-4 py-2 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 rounded-2xl">
+                <button onclick="resetUI()" class="flex items-center gap-2 text-sm font-medium px-4 py-2 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 rounded-2xl">
                     <i class="fas fa-arrow-left"></i> Back
                 </button>
             </div>
@@ -80,7 +71,6 @@
             <div id="results-list" class="space-y-3"></div>
         </div>
 
-        <!-- STATUS / LOADING -->
         <div id="status" class="hidden text-center py-8">
             <div class="inline-flex items-center gap-3 text-[#48B8C7]">
                 <i class="fas fa-spinner fa-spin text-2xl"></i>
@@ -88,19 +78,16 @@
             </div>
         </div>
 
-        <!-- NO LOCATION FALLBACK -->
         <div id="no-location" class="hidden bg-gray-100 dark:bg-white/10 rounded-3xl p-8 text-center">
             <p class="text-2xl mb-4">📍 Location needed</p>
             <p class="mb-6 text-gray-700 dark:text-gray-300">Enable location services for real-time distances.</p>
-            <button onclick="getLocation()" 
-                    class="bg-[#003DA5] dark:bg-white text-white dark:text-[#003DA5] font-bold px-8 py-4 rounded-2xl text-lg hover:bg-[#C8102E] hover:text-white transition-all">
+            <button onclick="getLocation()" class="bg-[#003DA5] dark:bg-white text-white dark:text-[#003DA5] font-bold px-8 py-4 rounded-2xl text-lg hover:bg-[#C8102E] hover:text-white transition-all">
                 Share My Location
             </button>
             <p onclick="showAllSpots()" class="text-sm mt-6 text-[#48B8C7] cursor-pointer hover:underline">Or just show me everything</p>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <div class="max-w-2xl mx-auto px-4 mt-12 text-center text-xs text-gray-500 dark:text-white/60">
         <p class="mb-3">🔥 This is the real QR code page on your HFXGo shirt</p>
         <p class="mt-6 text-[10px]">Made with donair sauce in Halifax, NS • 2026</p>
