@@ -27,7 +27,9 @@
             <div class="flex items-center gap-3">
                 <img src="donair-icon.png" alt="HFX Donair" class="w-12 h-12 flex-shrink-0">
                 <div>
-                    <h1 class="text-4xl font-bold tracking-tighter">HFX<span class="text-[#C8102E]">Go</span></h1>
+                    <h1 class="text-4xl font-bold tracking-tighter">
+                        <span class="text-[#C8102E]">HFX</span><span class="text-white">Go</span>
+                    </h1>
                     <p class="text-sm font-medium text-[#48B8C7] -mt-1">Donair • Washroom • Beer • Coffee Finder™</p>
                 </div>
             </div>
@@ -49,7 +51,7 @@
             <p class="text-[#48B8C7] text-sm font-medium">East Coast priorities since 2026</p>
         </div>
 
-        <!-- 2 BUTTONS PER LINE (2-column grid) -->
+        <!-- 2 BUTTONS PER LINE -->
         <div class="grid grid-cols-2 gap-4 mb-10" id="main-buttons">
             <button onclick="findCategory('donair')" class="bg-[#C8102E] hover:bg-[#a80f24] text-white font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
                 <img src="donair-icon.png" alt="Donair" class="w-14 h-14 mb-2">
@@ -314,7 +316,7 @@
 
         window.onload = () => {
             initTheme();
-            console.log('%c✅ HFXGo Finder — 2 buttons per line layout loaded!', 'color:#C8102E; font-weight:bold');
+            console.log('%c✅ HFXGo Finder 100% complete with HFX red + Go white!', 'color:#C8102E; font-weight:bold');
             setTimeout(() => { if (!userLat) getLocation(); }, 800);
         };
     </script>
