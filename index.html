@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HFXGo Finder • Donair & Washroom Locator</title>
+    <title>HFXGo Finder • Donair & Washroom & Cold Beer Locator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body { font-family: 'Inter', system_ui, sans-serif; }
+        
+        /* SOLID NOVA SCOTIA FLAG BLUE */
         .donair-bg { background-color: #003DA5; }
+        
         .result-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -28,7 +31,7 @@
                 <img src="donair-icon.png" alt="HFX Donair" class="w-12 h-12 flex-shrink-0">
                 <div>
                     <h1 class="text-4xl font-bold tracking-tighter">HFX<span class="text-[#C8102E]">Go</span></h1>
-                    <p class="text-sm font-medium text-[#48B8C7] -mt-1">Donair &amp; Public Washroom Finder™</p>
+                    <p class="text-sm font-medium text-[#48B8C7] -mt-1">Donair • Washroom • Cold Beer Finder™</p>
                 </div>
             </div>
             <div class="flex items-center gap-4">
@@ -45,18 +48,28 @@
 
     <div class="max-w-2xl mx-auto px-4 pt-8">
         <div class="text-center mb-8">
-            <h2 class="text-2xl font-semibold mb-2">Find the donair.<br>Then <span class="text-[#48B8C7]">GO</span>.</h2>
+            <h2 class="text-2xl font-semibold mb-2">Find the donair.<br>Then <span class="text-[#48B8C7]">GO</span>… and grab a cold one.</h2>
             <p class="text-[#48B8C7] text-sm font-medium">East Coast priorities since 2026</p>
         </div>
 
-        <div class="grid grid-cols-2 gap-4 mb-10" id="main-buttons">
-            <button onclick="findCategory('donair')" class="bg-[#C8102E] hover:bg-[#a80f24] text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
-                <img src="donair-icon.png" alt="Donair" class="w-16 h-16 mb-3">
+        <!-- THREE BUTTONS -->
+        <div class="grid grid-cols-3 gap-4 mb-10" id="main-buttons">
+            <button onclick="findCategory('donair')" 
+                    class="bg-[#C8102E] hover:bg-[#a80f24] text-white font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+                <img src="donair-icon.png" alt="Donair" class="w-14 h-14 mb-2">
                 NEAREST<br>DONAIR
             </button>
-            <button onclick="findCategory('washroom')" class="bg-[#48B8C7] hover:bg-[#3a9fa8] text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
-                <span class="text-6xl mb-3">🚽</span>
+            
+            <button onclick="findCategory('washroom')" 
+                    class="bg-[#48B8C7] hover:bg-[#3a9fa8] text-white font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+                <span class="text-6xl mb-2">🚽</span>
                 NEAREST<br>WASHROOM
+            </button>
+            
+            <button onclick="findCategory('beer')" 
+                    class="bg-[#FFD700] hover:bg-[#e6c200] text-[#003DA5] font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+                <span class="text-6xl mb-2">🍺</span>
+                NEAREST<br>COLD BEER
             </button>
         </div>
 
@@ -94,7 +107,7 @@
     <!-- FOOTER -->
     <div class="max-w-2xl mx-auto px-4 mt-12 text-center text-xs text-gray-500 dark:text-white/60">
         <p class="mb-3">🔥 This is the real QR code page on your HFXGo shirt</p>
-        <p class="mt-6 text-[10px]">Made with donair sauce in Halifax, NS • 2026</p>
+        <p class="mt-6 text-[10px]">Made with donair sauce + cold beer in Halifax, NS • 2026</p>
     </div>
 
     <script>
@@ -124,6 +137,17 @@
             { name: "Citadel Hill (Visitor Centre)", address: "901 Citadel Hill", lat: 44.6523, lng: -63.5821, note: "Tourist friendly" },
             { name: "Scotia Square Food Court", address: "5201 Duke St", lat: 44.6498, lng: -63.5764, note: "Inside mall" },
             { name: "Grand Parade (City Hall)", address: "1740 Granville St", lat: 44.6491, lng: -63.5748, note: "Downtown public" }
+        ];
+
+        const beerStores = [
+            { name: "NSLC Quinpool", address: "6385 Quinpool Rd, Halifax, NS", lat: 44.6430, lng: -63.5905, note: "Open late • Huge selection" },
+            { name: "NSLC Spring Garden", address: "1657 Granville St, Halifax, NS", lat: 44.6455, lng: -63.5740, note: "Downtown • Open daily" },
+            { name: "NSLC Bayers Lake", address: "200 Chain Lake Dr, Halifax, NS", lat: 44.6520, lng: -63.6180, note: "Biggest in Halifax area" },
+            { name: "NSLC Dartmouth Crossing", address: "100 Ikea Way, Dartmouth, NS", lat: 44.7005, lng: -63.5500, note: "Dartmouth side" },
+            { name: "NSLC Clayton Park", address: "278 Lacewood Dr, Halifax, NS", lat: 44.6605, lng: -63.6560, note: "Convenient West End" },
+            { name: "Bishop's Cellar", address: "1475 Lower Water St, Halifax, NS", lat: 44.6485, lng: -63.5735, note: "Premium beer & craft selection" },
+            { name: "NSLC Sackville", address: "752 Sackville Dr, Lower Sackville, NS", lat: 44.7680, lng: -63.6800, note: "Sackville location" },
+            { name: "NSLC Bedford", address: "1597 Bedford Hwy, Bedford, NS", lat: 44.7280, lng: -63.6550, note: "Bedford Highway" }
         ];
 
         // ====================== HELPERS ======================
@@ -195,12 +219,16 @@
             document.getElementById("main-buttons").classList.add("hidden");
             document.getElementById("results-panel").classList.remove("hidden");
             const titleEl = document.getElementById("results-title");
+
             if (category === "donair") {
                 titleEl.innerHTML = `<img src="donair-icon.png" class="w-8 h-8 inline"> <span class="text-[#C8102E]">NEAREST DONAIR</span>`;
                 renderResults(calculateDistances(donairs), category);
-            } else {
+            } else if (category === "washroom") {
                 titleEl.innerHTML = `🚽 <span class="text-[#48B8C7]">NEAREST WASHROOM</span>`;
                 renderResults(calculateDistances(washrooms), category);
+            } else if (category === "beer") {
+                titleEl.innerHTML = `🍺 <span class="text-[#FFD700]">NEAREST COLD BEER</span>`;
+                renderResults(calculateDistances(beerStores), category);
             }
         }
 
@@ -216,15 +244,20 @@
             document.getElementById("main-buttons").classList.add("hidden");
             const titleEl = document.getElementById("results-title");
             titleEl.innerHTML = `📍 ALL SPOTS`;
+
             const container = document.getElementById("results-list");
             container.innerHTML = `
                 <div class="mb-8">
                     <h4 class="text-[#C8102E] font-bold text-xl mb-4 flex items-center gap-2"><img src="donair-icon.png" class="w-8 h-8"> DONAIRS</h4>
                     ${donairs.map(d => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${d.name}</div><div class="text-sm text-white/70">${d.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${d.lat},${d.lng}" target="_blank" class="text-[#C8102E] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
                 </div>
-                <div>
+                <div class="mb-8">
                     <h4 class="text-[#48B8C7] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🚽</span> WASHROOMS</h4>
                     ${washrooms.map(w => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${w.name}</div><div class="text-sm text-white/70">${w.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${w.lat},${w.lng}" target="_blank" class="text-[#48B8C7] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
+                </div>
+                <div>
+                    <h4 class="text-[#FFD700] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🍺</span> COLD BEER STORES</h4>
+                    ${beerStores.map(b => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${b.name}</div><div class="text-sm text-white/70">${b.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${b.lat},${b.lng}" target="_blank" class="text-[#FFD700] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
                 </div>
             `;
         }
@@ -250,9 +283,10 @@
             }
         }
 
+        // ====================== INIT ======================
         window.onload = () => {
             initTheme();
-            console.log('%c✅ HFXGo Finder ready with custom donair icon!', 'color:#C8102E; font-weight:bold');
+            console.log('%c✅ HFXGo Finder 100% complete with Cold Beer added!', 'color:#C8102E; font-weight:bold');
             setTimeout(() => { if (!userLat) getLocation(); }, 800);
         };
     </script>
