@@ -9,10 +9,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body { font-family: 'Inter', system_ui, sans-serif; }
-        
-        /* SOLID NOVA SCOTIA FLAG BLUE */
         .donair-bg { background-color: #003DA5; }
-        
         .result-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -54,20 +51,15 @@
 
         <!-- THREE BUTTONS -->
         <div class="grid grid-cols-3 gap-4 mb-10" id="main-buttons">
-            <button onclick="findCategory('donair')" 
-                    class="bg-[#C8102E] hover:bg-[#a80f24] text-white font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+            <button onclick="findCategory('donair')" class="bg-[#C8102E] hover:bg-[#a80f24] text-white font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
                 <img src="donair-icon.png" alt="Donair" class="w-14 h-14 mb-2">
                 NEAREST<br>DONAIR
             </button>
-            
-            <button onclick="findCategory('washroom')" 
-                    class="bg-[#48B8C7] hover:bg-[#3a9fa8] text-white font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+            <button onclick="findCategory('washroom')" class="bg-[#48B8C7] hover:bg-[#3a9fa8] text-white font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
                 <span class="text-6xl mb-2">🚽</span>
                 NEAREST<br>WASHROOM
             </button>
-            
-            <button onclick="findCategory('beer')" 
-                    class="bg-[#FFD700] hover:bg-[#e6c200] text-[#003DA5] font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+            <button onclick="findCategory('beer')" class="bg-[#FFD700] hover:bg-[#e6c200] text-[#003DA5] font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
                 <span class="text-6xl mb-2">🍺</span>
                 NEAREST<br>COLD BEER
             </button>
@@ -140,14 +132,23 @@
         ];
 
         const beerStores = [
+            // NSLC Stores
             { name: "NSLC Quinpool", address: "6385 Quinpool Rd, Halifax, NS", lat: 44.6430, lng: -63.5905, note: "Open late • Huge selection" },
             { name: "NSLC Spring Garden", address: "1657 Granville St, Halifax, NS", lat: 44.6455, lng: -63.5740, note: "Downtown • Open daily" },
             { name: "NSLC Bayers Lake", address: "200 Chain Lake Dr, Halifax, NS", lat: 44.6520, lng: -63.6180, note: "Biggest in Halifax area" },
             { name: "NSLC Dartmouth Crossing", address: "100 Ikea Way, Dartmouth, NS", lat: 44.7005, lng: -63.5500, note: "Dartmouth side" },
             { name: "NSLC Clayton Park", address: "278 Lacewood Dr, Halifax, NS", lat: 44.6605, lng: -63.6560, note: "Convenient West End" },
-            { name: "Bishop's Cellar", address: "1475 Lower Water St, Halifax, NS", lat: 44.6485, lng: -63.5735, note: "Premium beer & craft selection" },
             { name: "NSLC Sackville", address: "752 Sackville Dr, Lower Sackville, NS", lat: 44.7680, lng: -63.6800, note: "Sackville location" },
-            { name: "NSLC Bedford", address: "1597 Bedford Hwy, Bedford, NS", lat: 44.7280, lng: -63.6550, note: "Bedford Highway" }
+            { name: "NSLC Bedford", address: "1597 Bedford Hwy, Bedford, NS", lat: 44.7280, lng: -63.6550, note: "Bedford Highway" },
+            // Downtown Halifax Pubs & Bars
+            { name: "The Old Triangle Irish Pub", address: "5136 Prince St, Halifax, NS", lat: 44.6492, lng: -63.5738, note: "Downtown Irish pub • Cold pints & live music" },
+            { name: "Stillwell Beer Bar", address: "1672 Barrington St, Halifax, NS", lat: 44.6485, lng: -63.5752, note: "Craft beer heaven downtown" },
+            { name: "The Carleton", address: "1685 Argyle St, Halifax, NS", lat: 44.6460, lng: -63.5730, note: "Live music & cold beer downtown" },
+            { name: "Economy Shoe Shop", address: "1663 Argyle St, Halifax, NS", lat: 44.6475, lng: -63.5735, note: "Classic downtown bar • Open late" },
+            { name: "Bearly's House of Blues", address: "1269 Barrington St, Halifax, NS", lat: 44.6468, lng: -63.5745, note: "Blues bar with cold beer" },
+            { name: "The Dome", address: "1726 Argyle St, Halifax, NS", lat: 44.6452, lng: -63.5742, note: "Popular downtown nightclub/bar" },
+            { name: "Lot 6", address: "1685 Argyle St, Halifax, NS", lat: 44.6462, lng: -63.5732, note: "Cocktail & beer bar downtown" },
+            { name: "Bishop's Cellar", address: "1475 Lower Water St, Halifax, NS", lat: 44.6485, lng: -63.5735, note: "Premium beer & craft selection" }
         ];
 
         // ====================== HELPERS ======================
@@ -227,7 +228,7 @@
                 titleEl.innerHTML = `🚽 <span class="text-[#48B8C7]">NEAREST WASHROOM</span>`;
                 renderResults(calculateDistances(washrooms), category);
             } else if (category === "beer") {
-                titleEl.innerHTML = `🍺 <span class="text-[#FFD700]">NEAREST COLD BEER</span>`;
+                titleEl.innerHTML = `🍺 <span class="text-[#FFD700]">NEAREST COLD BEER / PUB</span>`;
                 renderResults(calculateDistances(beerStores), category);
             }
         }
@@ -256,7 +257,7 @@
                     ${washrooms.map(w => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${w.name}</div><div class="text-sm text-white/70">${w.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${w.lat},${w.lng}" target="_blank" class="text-[#48B8C7] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
                 </div>
                 <div>
-                    <h4 class="text-[#FFD700] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🍺</span> COLD BEER STORES</h4>
+                    <h4 class="text-[#FFD700] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🍺</span> COLD BEER & DOWNTOWN PUBS/BARS</h4>
                     ${beerStores.map(b => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${b.name}</div><div class="text-sm text-white/70">${b.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${b.lat},${b.lng}" target="_blank" class="text-[#FFD700] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
                 </div>
             `;
@@ -283,10 +284,9 @@
             }
         }
 
-        // ====================== INIT ======================
         window.onload = () => {
             initTheme();
-            console.log('%c✅ HFXGo Finder 100% complete with Cold Beer added!', 'color:#C8102E; font-weight:bold');
+            console.log('%c✅ HFXGo Finder 100% complete with Cold Beer + Downtown Pubs!', 'color:#C8102E; font-weight:bold');
             setTimeout(() => { if (!userLat) getLocation(); }, 800);
         };
     </script>
