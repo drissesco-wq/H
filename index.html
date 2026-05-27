@@ -98,7 +98,15 @@
             { name: "Randy's Pizza & Donair", address: "2380 Agricola Street, Halifax, NS B3K 4B6", lat: 44.6525, lng: -63.5897, note: "Popular local spot, often praised in recent donair showdowns" },
             { name: "Revana Pizza", address: "29 Portland Street, Dartmouth, NS B2Y 1H1", lat: 44.6649537, lng: -63.5676769, note: "First donair shop in Dartmouth (est. 1970s), recently named best in Halifax competition" },
             { name: "Willy's Fresh Cut", address: "5239 Blowers Street, Halifax, NS B3J 1J8", lat: 44.6465, lng: -63.5745, note: "Pizza Corner staple known for late-night donairs, poutine & burgers" },
-            { name: "Johnny K's Authentic Donairs", address: "5246 Blowers Street, Halifax, NS B3J 1J7", lat: 44.6462, lng: -63.5748, note: "Authentic donairs + wraps on Pizza Corner" }
+            { name: "Johnny K's Authentic Donairs", address: "5246 Blowers Street, Halifax, NS B3J 1J7", lat: 44.6462, lng: -63.5748, note: "Authentic donairs + wraps on Pizza Corner" },
+            // NEW SPOTS ADDED BELOW
+            { name: "Sasy's Pizza", address: "971 Cole Harbour Rd, Dartmouth, NS B2V 1E8", lat: 44.6721, lng: -63.4943, note: "Cole Harbour local favourite since 1996, competed in best donair showdown" },
+            { name: "North Street Pizzeria (Donnini's)", address: "5576 North St, Halifax, NS B3K 1N2", lat: 44.656265, lng: -63.594537, note: "North End classic since 1989, strong donair game" },
+            { name: "Martha's Pizza II", address: "5212 Morris St, Halifax, NS B3J 1B4", lat: 44.6432, lng: -63.5745, note: "Downtown Halifax late-night spot, open till 3am on weekends" },
+            { name: "Jessy's Pizza", address: "6041 North St, Halifax, NS B3K 1P1", lat: 44.6552, lng: -63.5898, note: "Popular North Street location with solid donairs and pizza" },
+            { name: "Robert's Pizza Donairs & Subs", address: "364 Windmill Rd, Dartmouth, NS B3A 1J3", lat: 44.6849, lng: -63.5994, note: "Dartmouth staple known for big portions and late hours" },
+            { name: "Real Fake Meats", address: "2278 Gottingen St, Halifax, NS B3K 3B7", lat: 44.6528, lng: -63.5905, note: "Halifax's vegan butcher with excellent plant-based donairs" },
+            { name: "Shawarman Pizza & Subs", address: "342 Windmill Rd, Dartmouth, NS B3A 1J1", lat: 44.6842, lng: -63.6001, note: "Dartmouth spot with great shawarma-style donairs and pizza" }
         ];
 
         const washrooms = [
@@ -236,7 +244,7 @@
         // Init
         window.onload = () => {
             initTheme();
-            console.log('%c✅ HFXGo Finder updated with new donair spots!', 'color:#ff6200; font-weight:bold');
+            console.log('%c✅ HFXGo Finder — 16 donair spots loaded!', 'color:#ff6200; font-weight:bold');
             setTimeout(() => { if (!userLat) getLocation(); }, 800);
         };
     </script>
