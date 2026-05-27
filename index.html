@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HFXGo Finder • Donair & Washroom & Cold Beer Locator</title>
+    <title>HFXGo Finder • Donair • Washroom • Beer • Coffee</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -28,7 +28,7 @@
                 <img src="donair-icon.png" alt="HFX Donair" class="w-12 h-12 flex-shrink-0">
                 <div>
                     <h1 class="text-4xl font-bold tracking-tighter">HFX<span class="text-[#C8102E]">Go</span></h1>
-                    <p class="text-sm font-medium text-[#48B8C7] -mt-1">Donair • Washroom • Cold Beer Finder™</p>
+                    <p class="text-sm font-medium text-[#48B8C7] -mt-1">Donair • Washroom • Beer • Coffee Finder™</p>
                 </div>
             </div>
             <div class="flex items-center gap-4">
@@ -45,12 +45,12 @@
 
     <div class="max-w-2xl mx-auto px-4 pt-8">
         <div class="text-center mb-8">
-            <h2 class="text-2xl font-semibold mb-2">Find the donair.<br>Then <span class="text-[#48B8C7]">GO</span>… and grab a cold one.</h2>
+            <h2 class="text-2xl font-semibold mb-2">Find the donair.<br>Then <span class="text-[#48B8C7]">GO</span>… coffee, beer, bathroom.</h2>
             <p class="text-[#48B8C7] text-sm font-medium">East Coast priorities since 2026</p>
         </div>
 
-        <!-- THREE BUTTONS -->
-        <div class="grid grid-cols-3 gap-4 mb-10" id="main-buttons">
+        <!-- FOUR BUTTONS -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10" id="main-buttons">
             <button onclick="findCategory('donair')" class="bg-[#C8102E] hover:bg-[#a80f24] text-white font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
                 <img src="donair-icon.png" alt="Donair" class="w-14 h-14 mb-2">
                 NEAREST<br>DONAIR
@@ -62,6 +62,10 @@
             <button onclick="findCategory('beer')" class="bg-[#FFD700] hover:bg-[#e6c200] text-[#003DA5] font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
                 <span class="text-6xl mb-2">🍺</span>
                 NEAREST<br>COLD BEER
+            </button>
+            <button onclick="findCategory('coffee')" class="bg-[#B45309] hover:bg-[#92400E] text-white font-bold text-xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+                <span class="text-6xl mb-2">☕</span>
+                NEAREST<br>COFFEE
             </button>
         </div>
 
@@ -99,7 +103,7 @@
     <!-- FOOTER -->
     <div class="max-w-2xl mx-auto px-4 mt-12 text-center text-xs text-gray-500 dark:text-white/60">
         <p class="mb-3">🔥 This is the real QR code page on your HFXGo shirt</p>
-        <p class="mt-6 text-[10px]">Made with donair sauce + cold beer in Halifax, NS • 2026</p>
+        <p class="mt-6 text-[10px]">Made with donair sauce + cold beer + coffee in Halifax, NS • 2026</p>
     </div>
 
     <script>
@@ -132,7 +136,6 @@
         ];
 
         const beerStores = [
-            // NSLC Stores
             { name: "NSLC Quinpool", address: "6385 Quinpool Rd, Halifax, NS", lat: 44.6430, lng: -63.5905, note: "Open late • Huge selection" },
             { name: "NSLC Spring Garden", address: "1657 Granville St, Halifax, NS", lat: 44.6455, lng: -63.5740, note: "Downtown • Open daily" },
             { name: "NSLC Bayers Lake", address: "200 Chain Lake Dr, Halifax, NS", lat: 44.6520, lng: -63.6180, note: "Biggest in Halifax area" },
@@ -140,7 +143,6 @@
             { name: "NSLC Clayton Park", address: "278 Lacewood Dr, Halifax, NS", lat: 44.6605, lng: -63.6560, note: "Convenient West End" },
             { name: "NSLC Sackville", address: "752 Sackville Dr, Lower Sackville, NS", lat: 44.7680, lng: -63.6800, note: "Sackville location" },
             { name: "NSLC Bedford", address: "1597 Bedford Hwy, Bedford, NS", lat: 44.7280, lng: -63.6550, note: "Bedford Highway" },
-            // Downtown Halifax Pubs & Bars
             { name: "The Old Triangle Irish Pub", address: "5136 Prince St, Halifax, NS", lat: 44.6492, lng: -63.5738, note: "Downtown Irish pub • Cold pints & live music" },
             { name: "Stillwell Beer Bar", address: "1672 Barrington St, Halifax, NS", lat: 44.6485, lng: -63.5752, note: "Craft beer heaven downtown" },
             { name: "The Carleton", address: "1685 Argyle St, Halifax, NS", lat: 44.6460, lng: -63.5730, note: "Live music & cold beer downtown" },
@@ -149,6 +151,28 @@
             { name: "The Dome", address: "1726 Argyle St, Halifax, NS", lat: 44.6452, lng: -63.5742, note: "Popular downtown nightclub/bar" },
             { name: "Lot 6", address: "1685 Argyle St, Halifax, NS", lat: 44.6462, lng: -63.5732, note: "Cocktail & beer bar downtown" },
             { name: "Bishop's Cellar", address: "1475 Lower Water St, Halifax, NS", lat: 44.6485, lng: -63.5735, note: "Premium beer & craft selection" }
+        ];
+
+        const coffeeShops = [
+            { name: "Just Us! Coffee Roasters", address: "1679 Lower Water St, Halifax, NS", lat: 44.6485, lng: -63.5738, note: "Waterfront • Fair trade coffee" },
+            { name: "Two If By Sea Cafe", address: "1479 Lower Water St, Halifax, NS", lat: 44.6488, lng: -63.5732, note: "Iconic waterfront cafe" },
+            { name: "Ristretto Coffee", address: "5688 Spring Garden Rd, Halifax, NS", lat: 44.6445, lng: -63.5758, note: "Downtown specialty coffee" },
+            { name: "Anchor Coffee Bar", address: "5687 Spring Garden Rd, Halifax, NS", lat: 44.6448, lng: -63.5755, note: "Great espresso & pastries" },
+            { name: "Cafe Mokka", address: "5544 Kaye St, Halifax, NS", lat: 44.6415, lng: -63.5720, note: "Cozy North End cafe" },
+            { name: "Davis Wharf Coffee", address: "1649 Lower Water St, Halifax, NS", lat: 44.6490, lng: -63.5725, note: "Waterfront pour-over spot" },
+            { name: "Field Guide Coffee", address: "1652 Granville St, Halifax, NS", lat: 44.6458, lng: -63.5745, note: "Craft coffee & light bites" },
+            { name: "The Coffee Factory", address: "2015 Gottingen St, Halifax, NS", lat: 44.6675, lng: -63.5905, note: "North End favorite" },
+            // Tim Hortons
+            { name: "Tim Hortons Spring Garden", address: "5680 Spring Garden Rd, Halifax, NS", lat: 44.6445, lng: -63.5755, note: "24/7 drive-thru" },
+            { name: "Tim Hortons Quinpool", address: "6455 Quinpool Rd, Halifax, NS", lat: 44.6435, lng: -63.5900, note: "West End classic" },
+            { name: "Tim Hortons Upper Water", address: "1781 Upper Water St, Halifax, NS", lat: 44.6495, lng: -63.5730, note: "Waterfront location" },
+            // Starbucks
+            { name: "Starbucks Spring Garden", address: "5640 Spring Garden Rd, Halifax, NS", lat: 44.6448, lng: -63.5758, note: "Downtown flagship" },
+            { name: "Starbucks Parkland", address: "20 Parkland Dr, Halifax, NS", lat: 44.6525, lng: -63.6550, note: "Clayton Park" },
+            { name: "Starbucks Kaye St", address: "5554 Kaye St, Halifax, NS", lat: 44.6415, lng: -63.5720, note: "North End" },
+            // Second Cup
+            { name: "Second Cup Bayers Lake", address: "185 Chain Lake Drive, Halifax, NS", lat: 44.6515, lng: -63.6180, note: "Bayers Lake" },
+            { name: "Second Cup Dartmouth Crossing", address: "49 Gale Terrace, Dartmouth, NS", lat: 44.7000, lng: -63.5500, note: "Dartmouth Crossing" }
         ];
 
         // ====================== HELPERS ======================
@@ -230,6 +254,9 @@
             } else if (category === "beer") {
                 titleEl.innerHTML = `🍺 <span class="text-[#FFD700]">NEAREST COLD BEER / PUB</span>`;
                 renderResults(calculateDistances(beerStores), category);
+            } else if (category === "coffee") {
+                titleEl.innerHTML = `☕ <span class="text-[#B45309]">NEAREST COFFEE SHOP</span>`;
+                renderResults(calculateDistances(coffeeShops), category);
             }
         }
 
@@ -256,9 +283,13 @@
                     <h4 class="text-[#48B8C7] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🚽</span> WASHROOMS</h4>
                     ${washrooms.map(w => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${w.name}</div><div class="text-sm text-white/70">${w.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${w.lat},${w.lng}" target="_blank" class="text-[#48B8C7] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
                 </div>
-                <div>
-                    <h4 class="text-[#FFD700] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🍺</span> COLD BEER & DOWNTOWN PUBS/BARS</h4>
+                <div class="mb-8">
+                    <h4 class="text-[#FFD700] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">🍺</span> COLD BEER & PUBS</h4>
                     ${beerStores.map(b => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${b.name}</div><div class="text-sm text-white/70">${b.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${b.lat},${b.lng}" target="_blank" class="text-[#FFD700] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
+                </div>
+                <div>
+                    <h4 class="text-[#B45309] font-bold text-xl mb-4 flex items-center gap-2"><span class="text-3xl">☕</span> COFFEE SHOPS & CAFES</h4>
+                    ${coffeeShops.map(c => `<div class="result-card bg-white/10 rounded-3xl p-5 mb-3 flex justify-between"><div><div class="font-semibold">${c.name}</div><div class="text-sm text-white/70">${c.address}</div></div><a href="https://www.google.com/maps/dir/?api=1&destination=${c.lat},${c.lng}" target="_blank" class="text-[#B45309] text-2xl self-center"><i class="fas fa-directions"></i></a></div>`).join('')}
                 </div>
             `;
         }
@@ -286,7 +317,7 @@
 
         window.onload = () => {
             initTheme();
-            console.log('%c✅ HFXGo Finder 100% complete with Cold Beer + Downtown Pubs!', 'color:#C8102E; font-weight:bold');
+            console.log('%c✅ HFXGo Finder 100% complete with Tim Hortons, Starbucks & Second Cup added!', 'color:#B45309; font-weight:bold');
             setTimeout(() => { if (!userLat) getLocation(); }, 800);
         };
     </script>
