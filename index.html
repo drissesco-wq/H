@@ -90,13 +90,15 @@
     <script>
         // ====================== DATA ======================
         const donairs = [
-            { name: "King of Donair", address: "3745 Kempt Rd, Halifax", lat: 44.6631, lng: -63.6048, note: "The original. Open till 3am" },
-            { name: "Randy's Donair", address: "2281 Gottingen St, Halifax", lat: 44.6685, lng: -63.5902, note: "North End legend" },
-            { name: "Tony's Donair & Pizza", address: "291 Windmill Rd, Dartmouth", lat: 44.6792, lng: -63.5654, note: "Dartmouth side" },
-            { name: "Istanbul Donair", address: "1502 Queen St, Halifax", lat: 44.6428, lng: -63.5759, note: "Downtown quick" },
-            { name: "King of Donair", address: "6422 Quinpool Road, Halifax, NS", lat: 44.6442162, lng: -63.6008357, note: "The original since 1973. Iconic Halifax spot, open late" }
-            { name: "King of Donair", address: "451 Windmill Road, Dartmouth, NS", lat: 44.6849393, lng: -63.5993635, note: "Dartmouth location" }
-            { name: "King of Donair", address: "278 Lacewood Drive, Halifax, NS", lat: 44.6608276, lng: -63.6559687, note: "Clayton Park location" }
+            { name: "King of Donair", address: "6422 Quinpool Road, Halifax, NS", lat: 44.6442162, lng: -63.6008357, note: "The original since 1973. Iconic Halifax spot, open late" },
+            { name: "King of Donair", address: "278 Lacewood Drive, Halifax, NS", lat: 44.6608276, lng: -63.6559687, note: "Clayton Park location" },
+            { name: "King of Donair", address: "451 Windmill Road, Dartmouth, NS", lat: 44.6849393, lng: -63.5993635, note: "Dartmouth location" },
+            { name: "King of Donair", address: "688 Sackville Drive, Sackville, NS", lat: 44.7697688, lng: -63.6896267, note: "Sackville location" },
+            { name: "Tony's Famous Donairs & Pizza", address: "2390 Robie Street, Halifax, NS B3K 4M7", lat: 44.6528, lng: -63.5820, note: "Iconic since 1976, family-run landmark at Tony's Corner" },
+            { name: "Randy's Pizza & Donair", address: "2380 Agricola Street, Halifax, NS B3K 4B6", lat: 44.6525, lng: -63.5897, note: "Popular local spot, often praised in recent donair showdowns" },
+            { name: "Revana Pizza", address: "29 Portland Street, Dartmouth, NS B2Y 1H1", lat: 44.6649537, lng: -63.5676769, note: "First donair shop in Dartmouth (est. 1970s), recently named best in Halifax competition" },
+            { name: "Willy's Fresh Cut", address: "5239 Blowers Street, Halifax, NS B3J 1J8", lat: 44.6465, lng: -63.5745, note: "Pizza Corner staple known for late-night donairs, poutine & burgers" },
+            { name: "Johnny K's Authentic Donairs", address: "5246 Blowers Street, Halifax, NS B3J 1J7", lat: 44.6462, lng: -63.5748, note: "Authentic donairs + wraps on Pizza Corner" }
         ];
 
         const washrooms = [
@@ -143,7 +145,7 @@
             return spots.map(spot => {
                 const distance = haversine(userLat, userLng, spot.lat, spot.lng);
                 return { ...spot, distance };
-            }).sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+            }).sort((a, b) => parseFloat(a.distance || 9999) - parseFloat(b.distance || 9999));
         }
 
         function renderResults(spots, category) {
@@ -210,7 +212,6 @@
             `;
         }
 
-        // Dark mode toggle
         function toggleDarkMode() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
@@ -235,7 +236,7 @@
         // Init
         window.onload = () => {
             initTheme();
-            console.log('%c✅ HFXGo Finder is now LIVE with donairs!', 'color:#ff6200; font-weight:bold');
+            console.log('%c✅ HFXGo Finder updated with new donair spots!', 'color:#ff6200; font-weight:bold');
             setTimeout(() => { if (!userLat) getLocation(); }, 800);
         };
     </script>
