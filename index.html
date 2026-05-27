@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HFXGo Finder • Donair & Washroom Locator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        :root {
+            --navy: #0a2540;
+            --orange: #ff6200;
+            --teal: #00b8a9;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .donair-bg {
+            background: linear-gradient(135deg, #0a2540 0%, #ff6200 100%);
+        }
+        
+        .result-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(255 98 0);
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-[#0a2540] text-gray-900 dark:text-white min-h-screen pb-12">
+    <!-- HEADER -->
+    <div class="donair-bg py-6 px-6 border-b-4 border-[#ff6200]">
+        <div class="max-w-2xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="text-4xl">🍖</div>
+                <div>
+                    <h1 class="text-4xl font-bold tracking-tighter">HFX<span class="text-[#ff6200]">Go</span></h1>
+                    <p class="text-sm font-medium text-[#00b8a9] -mt-1">Donair &amp; Public Washroom Finder™</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <!-- Location status -->
+                <span class="px-3 py-1 bg-white/20 dark:bg-white/20 rounded-full flex items-center gap-1 text-sm">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="location-status" class="font-medium">Halifax, NS</span>
+                </span>
+                
+                <!-- Dark/Light Toggle -->
+                <button onclick="toggleDarkMode()" 
+                        class="w-10 h-10 flex items-center justify-center rounded-2xl bg-white/20 hover:bg-white/30 text-white transition-all text-2xl">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-2xl mx-auto px-4 pt-8">
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-semibold mb-2">Find the donair.<br>Then <span class="text-[#00b8a9]">GO</span>.</h2>
+            <p class="text-[#00b8a9] text-sm font-medium">East Coast priorities since 2026</p>
+        </div>
+
+        <!-- MAIN BUTTONS -->
+        <div class="grid grid-cols-2 gap-4 mb-10" id="main-buttons">
+            <button onclick="findCategory('donair')"
+                    class="bg-[#ff6200] hover:bg-orange-600 text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+                <span class="text-6xl mb-3">🍖</span>
+                NEAREST<br>DONAIR
+            </button>
+            
+            <button onclick="findCategory('washroom')"
+                    class="bg-[#00b8a9] hover:bg-teal-600 text-white font-bold text-2xl py-8 rounded-3xl flex flex-col items-center justify-center shadow-xl active:scale-95 transition-all">
+                <span class="text-6xl mb-3">🚽</span>
+                NEAREST<br>WASHROOM
+            </button>
+        </div>
+
+        <!-- RESULTS SECTION -->
+        <div id="results-panel" class="hidden">
+            <div class="flex items-center justify-between mb-6">
+                <h3 id="results-title" class="text-2xl font-bold flex items-center gap-3"></h3>
+                <button onclick="resetUI()" 
+                        class="flex items-center gap-2 text-sm font-medium px-4 py-2 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 rounded-2xl">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+            
+            <div id="distance-note" class="text-xs text-[#00b8a9] mb-4 font-medium flex items-center gap-1"></div>
+            
+            <div id="results-list" class="space-y-3"></div>
+        </div>
+
+        <!-- STATUS / LOADING -->
+        <div id="status" class="hidden text-center py-8">
+            <div class="inline-flex items-center gap-3 text-[#00b8a9]">
+                <i class="fas fa-spinner fa-spin text-2xl"></i>
+                <span id="status-text" class="font-medium">Getting your location…</span>
+            </div>
+        </div>
+
+        <!-- NO LOCATION FALLBACK -->
+        <div id="no-location" class="hidden bg-gray-100 dark:bg-white/10 rounded-3xl p-8 text-center">
+            <p class="text-2xl mb-4">📍 Location needed</p>
+            <p class="mb-6 text-gray-700 dark:text-gray-300">Enable location services for real-time distances and the closest spots in Halifax.</p>
+            <button onclick="getLocation()" 
+                    class="bg-[#0a2540] dark:bg-white text-white dark:text-[#0a2540] font-bold px-8 py-4 rounded-2xl text-lg hover:bg-[#ff6200] hover:text-white transition-all">
+                Share My Location
+            </button>
+            <p onclick="showAllSpots()" class="text-sm mt-6 text-[#00b8a9] cursor-pointer hover:underline">Or just show me everything</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="max-w-2xl mx-auto px-4 mt-12 text-center text-xs text-gray-500 dark:text-white/60">
+        <p class="mb-3">🔥 This is the real QR code page on your HFXGo shirt</p>
+        <div class="flex justify-center items-center gap-8 text-base">
+            <a href="https://hfxgo.ca" class="flex items-center gap-1 hover:text-[#ff6200]">
+                <i class="fas fa-tshirt"></i> Shop HFXGo Tees
+            </a>
+            <a href="#" onclick="window.location.reload()" class="flex items-center gap-1 hover:text-[#00b8a9]">
+                <i class="fas fa-redo"></i> Reset Finder
+            </a>
+        </div>
+        <p class="mt-6 text-[10px]">Made with donair sauce in Halifax, NS • 2026</p>
+    </div>
+
+    <script>
+        // ====================== DATA (same as before) ======================
+        const donairs = [ /* ... same array as previous version ... */ ];
+        const washrooms = [ /* ... same array as previous version ... */ ];
+
+        // (Full data arrays from the previous code are unchanged — just paste them here if you copy the whole thing)
+
+        // ====================== TOGGLE DARK MODE ======================
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.theme = 'light';
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                html.classList.add('dark');
+                localStorage.theme = 'dark';
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+
+        // Load saved theme
+        function initTheme() {
+            if (localStorage.theme === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('theme-icon').classList.replace('fa-moon', 'fa-sun');
+            }
+        }
+
+        // Rest of your original JS (getLocation, haversine, renderResults, findCategory, etc.) stays 100% the same
+        // ... paste the entire <script> from the previous version here ...
+
+        // Just add this at the very bottom of the script:
+        window.onload = () => {
+            initTheme();
+            console.log('%c✅ HFXGo Finder ready with dark/light toggle', 'color:#ff6200; font-weight:bold');
+            setTimeout(() => { if (!userLat) getLocation(); }, 800);
+        };
+    </script>
+</body>
+</html>
