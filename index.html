@@ -126,7 +126,21 @@
     <!-- FOOTER -->
     <div class="max-w-2xl mx-auto px-4 mt-12 text-center text-xs text-gray-500 dark:text-white/60">
         <p class="mb-3">🔥 This is the real QR code page on your HFXGo shirt</p>
-        <p class="mt-6 text-[10px]">Made with donair sauce + cold beer + coffee in Halifax, NS • 2026</p>
+        
+        <!-- Visitor Counter + Location -->
+        <div class="flex flex-col items-center gap-1 mb-4 text-sm">
+            <div class="flex items-center gap-2">
+                <span class="text-[#48B8C7]">👀</span>
+                <span id="visitor-count" class="font-mono font-bold text-[#C8102E]">0</span>
+                <span class="font-medium">visitors and counting</span>
+            </div>
+            <div class="flex items-center gap-1 text-xs">
+                <span>👋 You're viewing from</span>
+                <span id="visitor-location" class="font-semibold text-[#48B8C7]"></span>
+            </div>
+        </div>
+
+        <p class="text-[10px]">Made with donair sauce + cold beer + coffee in Halifax, NS • 2026</p>
     </div>
 
     <script>
@@ -195,7 +209,50 @@
             { name: "Second Cup Dartmouth Crossing", address: "49 Gale Terrace, Dartmouth, NS", lat: 44.7000, lng: -63.5500, note: "Dartmouth Crossing" }
         ];
 
-        // ====================== HELPERS ======================
+        // ====================== VISITOR COUNTER + LOCATION ======================
+        async function updateVisitorData() {
+            // Total visitors
+            try {
+                const res = await fetch('https://api.countapi.xyz/hit/hfxgo-finder/visits');
+                const data = await res.json();
+                document.getElementById('visitor-count').textContent = data.value.toLocaleString('en-US');
+            } catch(e) {}
+
+            // Current visitor location
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                const data = await res.json();
+                const loc = data.region && data.country_name 
+                    ? `${data.region}, ${data.country_name}` 
+                    : data.city 
+                        ? `${data.city}, ${data.country_name || 'Earth'}`
+                        : 'somewhere awesome';
+                document.getElementById('visitor-location').textContent = loc;
+            } catch(e) {
+                document.getElementById('visitor-location').textContent = "somewhere awesome";
+            }
+        }
+
+        // ====================== LIVE WEATHER ======================
+        async function loadWeather() {
+            const banner = document.getElementById('weather-banner');
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=44.65&longitude=-63.57&current=temperature_2m,apparent_temperature,weather_code&timezone=America/Halifax');
+                const data = await res.json();
+                const current = data.current;
+
+                const iconMap = {0:"☀️",1:"🌤️",2:"⛅",3:"☁️",45:"🌫️",48:"🌫️",51:"🌧️",53:"🌧️",55:"🌧️",61:"🌧️",63:"🌧️",65:"🌧️",71:"❄️",73:"❄️",75:"❄️",95:"⛈️",96:"⛈️",99:"⛈️"};
+
+                document.getElementById('weather-icon').textContent = iconMap[current.weather_code] || "🌤️";
+                document.getElementById('weather-desc').textContent = current.weather_code === 0 ? "Clear" : "Cloudy/Rain";
+                document.getElementById('weather-temp').innerHTML = `${Math.round(current.temperature_2m)}°C`;
+                document.getElementById('feels-like').textContent = `${Math.round(current.apparent_temperature)}°C`;
+
+                banner.classList.remove('hidden');
+            } catch(e) {}
+        }
+
+        // ====================== CORE FUNCTIONS ======================
         function haversine(lat1, lon1, lat2, lon2) {
             const R = 6371;
             const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -221,7 +278,10 @@
                         document.getElementById("status").classList.add("hidden");
                         window.lastCategory && findCategory(window.lastCategory, true);
                     },
-                    () => { document.getElementById("status").classList.add("hidden"); document.getElementById("no-location").classList.remove("hidden"); }
+                    () => { 
+                        document.getElementById("status").classList.add("hidden"); 
+                        document.getElementById("no-location").classList.remove("hidden"); 
+                    }
                 );
             }
         }
@@ -335,32 +395,12 @@
             }
         }
 
-        // ====================== LIVE HALIFAX WEATHER ======================
-        async function loadWeather() {
-            const banner = document.getElementById('weather-banner');
-            try {
-                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=44.65&longitude=-63.57&current=temperature_2m,apparent_temperature,weather_code&timezone=America/Halifax');
-                const data = await res.json();
-                const current = data.current;
-
-                const iconMap = { 0: "☀️", 1: "🌤️", 2: "⛅", 3: "☁️", 45: "🌫️", 48: "🌫️", 51: "🌧️", 53: "🌧️", 55: "🌧️", 61: "🌧️", 63: "🌧️", 65: "🌧️", 71: "❄️", 73: "❄️", 75: "❄️", 95: "⛈️", 96: "⛈️", 99: "⛈️" };
-
-                document.getElementById('weather-icon').textContent = iconMap[current.weather_code] || "🌤️";
-                document.getElementById('weather-desc').textContent = current.weather_code === 0 ? "Clear" : current.weather_code < 10 ? "Mostly Clear" : "Cloudy/Rain";
-                document.getElementById('weather-temp').innerHTML = `${Math.round(current.temperature_2m)}°C`;
-                document.getElementById('feels-like').textContent = `${Math.round(current.apparent_temperature)}°C`;
-
-                banner.classList.remove('hidden');
-            } catch (e) {
-                console.log("Weather fetch failed");
-                banner.classList.add('hidden');
-            }
-        }
-
+        // ====================== INIT ======================
         window.onload = () => {
             initTheme();
-            loadWeather();   // ← Live Halifax weather
-            console.log('%c✅ HFXGo Finder with live Halifax weather banner loaded!', 'color:#C8102E; font-weight:bold');
+            updateVisitorData();
+            loadWeather();
+            console.log('%c✅ HFXGo Finder 100% complete with visitor location!', 'color:#C8102E; font-weight:bold');
             setTimeout(() => { if (!userLat) getLocation(); }, 800);
         };
     </script>
